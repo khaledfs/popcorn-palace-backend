@@ -1,34 +1,33 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, Min } from 'class-validator';
+import { IsNumber, Min } from 'class-validator';
 import { BookingsService } from './service';
 
 class CreateBookingDto {
+  @IsNumber()
+  showtimeId: number;
 
-    @IsNumber()
-    showtimeId: number;
-    
-    @Type(() => Number)
-    @Min(1)
-    @IsNumber()
-    seatNumber: number;
+  @Type(() => Number)
+  @Min(1)
+  @IsNumber()
+  seatNumber: number;
 
-    @IsNumber()
-    userId: number;
+  @IsNumber()
+  userId: number;
 }
 
 @Controller('bookings')
 export class BookingsController {
-    constructor(private readonly bookingsService: BookingsService) { }
+  constructor(private readonly bookingsService: BookingsService) {}
 
-    @Post()
-    @HttpCode(200) // Override default 201 status code
-    async book(@Body() body: CreateBookingDto) {
-        const bookingId = await this.bookingsService.book({
-            showtimeId: body.showtimeId,    
-            seatNumber: body.seatNumber,
-            userId: body.userId,
-        });
-        return { bookingId };
-    }
+  @Post()
+  @HttpCode(200) // Override default 201 status code
+  async book(@Body() body: CreateBookingDto) {
+    const bookingId = await this.bookingsService.book({
+      showtimeId: body.showtimeId,
+      seatNumber: body.seatNumber,
+      userId: body.userId,
+    });
+    return { bookingId };
+  }
 }

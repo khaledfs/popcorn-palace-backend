@@ -20,6 +20,4 @@ export class Showtime {
 
   @Column({ type: 'timestamptz' })
   endTime: Date;
-
-  
 }

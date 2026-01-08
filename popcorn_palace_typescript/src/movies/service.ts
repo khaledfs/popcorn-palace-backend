@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Movie } from "./movie.entity";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Movie } from './movie.entity';
 
 @Injectable()
 export class MoviesService {
@@ -27,21 +27,20 @@ export class MoviesService {
     return this.moviesRepository.save(movie);
   }
 
- 
-
   async updateByTitle(movieTitle: string, data: Partial<Movie>) {
-  const movie = await this.moviesRepository.findOne({ where: { title: movieTitle } });
-  if (!movie) throw new NotFoundException('Movie not found');
+    const movie = await this.moviesRepository.findOne({
+      where: { title: movieTitle },
+    });
+    if (!movie) throw new NotFoundException('Movie not found');
 
-  Object.assign(movie, data);
-  await this.moviesRepository.save(movie);
-  return; // requirement response body empty
+    Object.assign(movie, data);
+    await this.moviesRepository.save(movie);
+    return; // requirement response body empty
+  }
+
+  async deleteByTitle(movieTitle: string) {
+    const result = await this.moviesRepository.delete({ title: movieTitle });
+    if (result.affected === 0) throw new NotFoundException('Movie not found');
+    return; // requirement response body empty
+  }
 }
-
-async deleteByTitle(movieTitle: string) {
-  const result = await this.moviesRepository.delete({ title: movieTitle });
-  if (result.affected === 0) throw new NotFoundException('Movie not found');
-  return; // requirement response body empty
-}
-
-}   
