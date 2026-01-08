@@ -1,8 +1,10 @@
-# Nestjs specific
+# NestJS / Node specific
 /dist
 /node_modules
 /build
 /tmp
+.temp
+.tmp
 
 # Logs
 logs
@@ -13,12 +15,39 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# dotenv environment variable files
+# Environment files
 .env
 .env.development
 .env.test
 .env.production
+.env.local
+.env.*.local
 
-# temp directory
-.temp
-.tmp
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+*.code-workspace
+
+# Test coverage
+/coverage
+.nyc_output
+
+# Package manager lock files (optional - remove if you want to track them)
+# pnpm-lock.yaml
+# yarn.lock
+
+# OS specific
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# TypeScript
+*.tsbuildinfo
+
+# NestJS specific
+.eslintignore
