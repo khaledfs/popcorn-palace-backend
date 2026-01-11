@@ -10,6 +10,7 @@ import {
 import { IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength, MaxLength } from 'class-validator';
 import { Type } from 'class-transformer';
 import { MoviesService } from './service';
+import { MovieResponseDto } from './dto/movie-response.dto';
 
 class CreateMovieDto {
 
@@ -48,9 +49,17 @@ export class MoviesController {
     }
 
     @Post()
-    @HttpCode(200) // Override default 201 status code
+    @HttpCode(200)
     async create(@Body() movieData: CreateMovieDto) {
-        return this.moviesService.create(movieData);
+        const movie = await this.moviesService.create(movieData);
+        return {
+            id: movie.id,
+            title: movie.title,
+            genre: movie.genre,
+            duration: movie.duration,
+            rating: movie.rating,
+            releaseYear: movie.releaseYear,
+        };
     }
 
     @Post('update/:movieTitle')
