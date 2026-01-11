@@ -1,70 +1,75 @@
 import {
-  Body,
-  Controller,
-  Get,
-  Delete,
-  HttpCode,
-  Post,
-  Param,
+    Body,
+    Controller,
+    Get,
+    Delete,
+    HttpCode,
+    Post,
+    Param,
 } from '@nestjs/common';
-import { IsInt, IsNotEmpty, IsNumber, Max, Min } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength, MaxLength } from 'class-validator';
 import { Type } from 'class-transformer';
 import { MoviesService } from './service';
 
 class CreateMovieDto {
-  @IsNotEmpty()
-  title: string;
-  @IsNotEmpty()
-  genre: string;
 
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  duration: number;
+    @IsNotEmpty()
+    @MinLength(1) // at least 1 character
+    @MaxLength(255) // max 255 characters
+    @IsString() // ensure it's a string
+    title: string;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  @Max(10)
-  rating: number;
+    @IsNotEmpty()
+    genre: string;
 
-  @Type(() => Number)
-  @IsInt()
-  releaseYear: number;
+    @Type(() => Number)
+    @IsInt()
+    @Min(1)
+    duration: number;
+
+    @Type(() => Number)
+    @IsNumber()
+    @Min(0)
+    @Max(10)
+    rating: number;
+
+    @Type(() => Number)
+    @IsInt()
+    releaseYear: number;
 }
 
 @Controller('movies')
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {}
+    constructor(private readonly moviesService: MoviesService) { }
 
-  @Get('all')
-  getAll() {
-    return this.moviesService.findAll();
-  }
+    @Get('all')
+    getAll() {
+        return this.moviesService.findAll();
+    }
 
-  @Post()
-  @HttpCode(200) // Override default 201 status code
-  async create(@Body() movieData: CreateMovieDto) {
-    return this.moviesService.create(movieData);
-  }
+    @Post()
+    @HttpCode(200) // Override default 201 status code
+    async create(@Body() movieData: CreateMovieDto) {
+        return this.moviesService.create(movieData);
+    }
 
-  @Post('update/:movieTitle')
-  @HttpCode(200) // Override default 201 status code
-  async updateByTitle(
-    @Param('movieTitle') movieTitle: string,
-    @Body() body: any,
-  ) {
-    return this.moviesService.updateByTitle(movieTitle, {
-      title: body.title,
-      genre: body.genre,
-      duration: body.duration,
-      rating: body.rating,
-      releaseYear: body.releaseYear,
-    });
-  }
+    @Post('update/:movieTitle')
+    @HttpCode(200) // Override default 201 status code
+    async updateByTitle(
+        @Param('movieTitle') movieTitle: string,
+        @Body() body: any,
+    ) {
+        return this.moviesService.updateByTitle(movieTitle, {
+            title: body.title,
+            genre: body.genre,
+            duration: body.duration,
+            rating: body.rating,
+            releaseYear: body.releaseYear,
+        });
+    }
 
-  @Delete(':movieTitle')
-  deleteByTitle(@Param('movieTitle') movieTitle: string) {
-    return this.moviesService.deleteByTitle(movieTitle);
-  }
+    @Delete(':movieTitle')
+    deleteByTitle(@Param('movieTitle') movieTitle: string) {
+        return this.moviesService.deleteByTitle(movieTitle);
+    }
 }

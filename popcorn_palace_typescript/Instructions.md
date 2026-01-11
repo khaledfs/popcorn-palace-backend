@@ -79,13 +79,23 @@ Output will be in the `dist/` directory. This directory is gitignored and regene
 npm test
 ```
 
+Runs all unit and integration tests using Jest.
+
 ### Run Tests in Watch Mode
 
 ```bash
 npm run test:watch
 ```
 
-Reruns tests automatically when you modify test files.
+Reruns tests automatically when you modify test files. Useful during development.
+
+### Run E2E Tests
+
+```bash
+npm run test:e2e
+```
+
+Runs end-to-end tests against the full API stack. Make sure the database is running.
 
 ### Run Tests with Coverage Report
 
@@ -93,7 +103,19 @@ Reruns tests automatically when you modify test files.
 npm run test:cov
 ```
 
-Coverage report will be generated in the `coverage/` directory.
+Generates a detailed coverage report in the `coverage/` directory showing:
+- Line coverage
+- Branch coverage
+- Function coverage
+- Statement coverage
+
+### Test Coverage
+
+The test suite includes:
+- **Movies**: Create, read, update, delete, validation
+- **Showtimes**: Create with overlap detection, overlapping constraint validation, update, delete
+- **Bookings**: Create, duplicate seat prevention, seat availability validation
+- **Error Handling**: Invalid inputs, non-existent resources (404), conflicts (409)
 
 ### Debug Tests
 

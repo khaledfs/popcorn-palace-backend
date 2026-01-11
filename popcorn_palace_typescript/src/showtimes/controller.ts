@@ -8,7 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString, IsDate, Min } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsDate, Min, MinLength } from 'class-validator';
 import { ShowtimesService } from './service';
 
 class CreateOrUpdateShowtimeDto {
@@ -23,6 +23,7 @@ class CreateOrUpdateShowtimeDto {
 
   @IsNotEmpty()
   @IsString()
+  @MinLength(1) // at least 1 character
   theater: string;
 
   @Type(() => Date)
