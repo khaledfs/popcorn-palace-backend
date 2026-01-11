@@ -10,7 +10,6 @@ import {
 import { IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength, MaxLength } from 'class-validator';
 import { Type } from 'class-transformer';
 import { MoviesService } from './service';
-import { MovieResponseDto } from './dto/movie-response.dto';
 
 class CreateMovieDto {
 

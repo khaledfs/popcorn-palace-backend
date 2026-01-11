@@ -24,11 +24,11 @@ export class BookingsController {
   @Post()  // Create a new booking
   @HttpCode(200) // Override default 201 status code
   async book(@Body() body: CreateBookingDto) {
-    const bookingId = await this.bookingsService.book({
+    const booking = await this.bookingsService.book({
       showtimeId: body.showtimeId,
       seatNumber: body.seatNumber,
       userId: body.userId,
     });
-    return { bookingId };
+    return { bookingId: booking.bookingId };
   }
 }

@@ -48,14 +48,18 @@ export class ShowtimesController {
   // POST /showtimes
   @Post()
   @HttpCode(200) // Override default 201 status code
-  create(@Body() body: CreateOrUpdateShowtimeDto) {
-    return this.showtimesService.create({
-      movieId: body.movieId,
-      price: body.price,
-      theater: body.theater,
-      startTime: body.startTime,
-      endTime: body.endTime,
-    });
+  async create(@Body() body: CreateOrUpdateShowtimeDto) {
+    const showtime = await this.showtimesService.create(body);
+
+    return {
+      id : showtime.id,
+      movieId: showtime.movieId,
+      price: showtime.price,
+      theater: showtime.theater,
+      startTime: showtime.startTime,
+      endTime: showtime.endTime,
+    };
+    
   }
 
   // POST /showtimes/update/{showtimeId}

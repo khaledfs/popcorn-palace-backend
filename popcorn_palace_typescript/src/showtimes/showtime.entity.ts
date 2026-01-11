@@ -1,5 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Movie } from '../movies/movie.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Showtime {
@@ -9,8 +8,8 @@ export class Showtime {
   @Column('numeric')
   price: number;
 
-  @ManyToOne(() => Movie, { onDelete: 'CASCADE', eager: true })
-  movieId: Movie;
+  @Column({ name: 'movie_id', type: 'int' })
+  movieId: number;
 
   @Column()
   theater: string;

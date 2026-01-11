@@ -50,7 +50,7 @@ export class ShowtimesService {
       );
     }
     const showtime = this.showtimesRepository.create({
-      movieId: movie,
+      movieId: input.movieId,
       price: input.price,
       theater: input.theater,
       startTime: input.startTime,
@@ -98,7 +98,7 @@ export class ShowtimesService {
         `Showtime overlaps with existing showtime in theater ${data.theater}`,
       );
     }
-    showtime.movieId = movie;
+    showtime.movieId = data.movieId;
     showtime.theater = data.theater;
     showtime.startTime = data.startTime;
     showtime.endTime = data.endTime;
