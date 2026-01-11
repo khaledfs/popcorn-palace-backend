@@ -21,7 +21,6 @@ Create a `.env` file in the root directory with the following:
 
 ```env
 DATABASE_URL=postgres://username:password@localhost:5432/popcorn_palace_db
-NODE_ENV=development
 ```
 
 **For PostgreSQL via Docker Compose:**
