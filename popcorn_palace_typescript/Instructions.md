@@ -173,21 +173,20 @@ test/
 ### Movies
 
 - `GET /movies` - Get all movies
-- `POST /movies` - Create a new movie
-- `GET /movies/:id` - Get a specific movie
-- `PUT /movies/:id` - Update a movie
-- `DELETE /movies/:id` - Delete a movie
+- `POST /movies` - Add a movie
+- `POST /movies/update/{movieTitle}` - Update a movie
+- `DELETE /movies/{movieTitle}` - Delete a movie
 
 ### Showtimes
 
-- `GET /showtimes/:id` - Get a showtime
-- `POST /showtimes` - Create a new showtime
-- `POST /showtimes/update/:id` - Update a showtime
-- `DELETE /showtimes/:id` - Delete a showtime
+- `GET /showtimes/{showtimeId}` - Get a showtime
+- `POST /showtimes` - Add a showtime
+- `POST /showtimes/update/{showtimeId}` - Update a showtime
+- `DELETE /showtimes/{showtimeId}` - Delete a showtime
 
 ### Bookings
 
-- `POST /bookings` - Create a new booking
+- `POST /bookings` - Book a booking
 
 ## Troubleshooting
 
