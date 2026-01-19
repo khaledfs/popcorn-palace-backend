@@ -9,6 +9,12 @@
 
 ## Setup
 
+### 0. Clone the Repository
+
+```bash
+git clone https://github.com/khaledfs/popcorn-palace-backend
+cd popcorn-palace-backend/popcorn_palace_typescript
+```
 ### 1. Install Dependencies
 
 ```bash
